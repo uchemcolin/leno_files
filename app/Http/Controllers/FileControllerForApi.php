@@ -80,11 +80,6 @@ class FileControllerForApi extends Controller
         ]);
 
         if($request->hasFile("file")) {
-            //$fileName = $request->file('file')->getClientOriginalName()."_".date("d-m-y h:i:s");
-
-            //$fileName = $request->file('file')->getClientOriginalName()."_".date("d-m-y h:i:s");
-            //$fileNameWithoutExtension = $request->file('file')->getBasename();
-            //$fileNameWithoutExtension = $request->file('file')->getFilename();
 
             //Laravel uses Symfony UploadedFile component that will be returned by Input::file() method.
             //It hasn't got any method to retrive file name, so you can use php native function pathinfo():
@@ -92,10 +87,7 @@ class FileControllerForApi extends Controller
 
             $fileExtension = $request->file('file')->getClientOriginalExtension();
 
-            //$fileName = $fileNameWithoutExtension."_".date("d-m-y_h:i:s").".".$fileExtension;
-            //$fileName = $fileNameWithoutExtension."_".date("d-m-y_h:i:s").".".$fileExtension;
-            //$fileName = "user_".$user_id."_file"."_".date("d-m-y_h-i-s").".".$fileExtension;
-            //$fileName = $fileNameWithoutExtension."_".date("d-m-y_h-i-s").".".$fileExtension;
+            
             $fileName = "user_".auth()->id()."_".date("d-m-y_h-i-s").".".$fileExtension; //decided to use this because of files with names that have unallowed characters in their names which will prevent them from showing on the live site or on the mobile app. So using user_id_"_".date("d-m-y_h-i-s").".".$fileExtension; for now is the best
 
             //return var_dump($fileName);
